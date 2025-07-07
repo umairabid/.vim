@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/umair/Workspace/sweaty_wallet/main_app/app/controllers'
+let g:netrw_dirhist_5='/Users/umair/Workspace/sweaty_wallet/main_app/app'
+let g:netrw_dirhist_4='/Users/umair/Workspace/sweaty_wallet/main_app/app/services'
+let g:netrw_dirhist_3='/Users/umair/Workspace/sweaty_wallet/main_app/app/services/transactions'
+let g:netrw_dirhist_2='/Users/umair/Workspace/sweaty_wallet/main_app/app/services'
+let g:netrw_dirhist_1='/Users/umair/Workspace/sweaty_wallet/main_app/app'
+let g:netrw_dirhist_0='/Users/umair/Workspace/sweaty_wallet/main_app/app/jobs'
+let g:netrw_dirhist_9='/Users/umair/Workspace/sweaty_wallet/main_app/app/jobs/transactions'
+let g:netrw_dirhist_8='/Users/umair/Workspace/sweaty_wallet/main_app/app/jobs'
+let g:netrw_dirhist_7='/Users/umair/Workspace/sweaty_wallet/main_app/app'

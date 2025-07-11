@@ -31,3 +31,10 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 autocmd FileType ruby compiler ruby
 
+let g:NERDTreeFileLines = 1
+
+call plug#begin()
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+

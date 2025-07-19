@@ -32,9 +32,15 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby compiler ruby
 
 let g:NERDTreeFileLines = 1
+let NERDTreeShowLineNumbers=1
+autocmd VimEnter * NERDTree
 
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
+set foldmethod=indent
+autocmd FileType javascript setlocal foldmethod=marker

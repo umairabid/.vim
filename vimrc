@@ -33,6 +33,7 @@ autocmd FileType ruby compiler ruby
 
 let g:NERDTreeFileLines = 1
 let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
 autocmd VimEnter * NERDTree
 
 call plug#begin()
@@ -57,8 +58,6 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
@@ -72,7 +71,47 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-set foldmethod=expr
-  \ foldexpr=lsp#ui#vim#folding#foldexpr()
-  \ foldtext=lsp#ui#vim#folding#foldtext()
+set foldmethod=indent
+autocmd FileType javascript setlocal foldmethod=marker
 
+let g:lsp_settings = {
+\   'ruby-lsp': {
+\     'initializationOptions': {
+\       'enabledFeatures': {
+\         'codeActions': v:true,
+\         'codeLens': v:true,
+\         'completion': v:true,
+\         'definition': v:true,
+\         'diagnostics': v:true,
+\         'documentHighlights': v:true,
+\         'documentLink': v:true,
+\         'documentSymbols': v:true,
+\         'foldingRanges': v:true,
+\         'formatting': v:true,
+\         'hover': v:true,
+\         'inlayHint': v:true,
+\         'onTypeFormatting': v:true,
+\         'selectionRanges': v:true,
+\         'semanticHighlighting': v:true,
+\         'signatureHelp': v:true,
+\         'typeHierarchy': v:true,
+\         'workspaceSymbol': v:true
+\       },
+\       'featuresConfiguration': {
+\         'inlayHint': {
+\           'implicitHashValue': v:true,
+\           'implicitRescue': v:true
+\         }
+\       },
+\       'indexing': {
+\         'excludedPatterns': ['path/to/excluded/file.rb'],
+\         'includedPatterns': ['path/to/included/file.rb'],
+\         'excludedGems': ['gem1', 'gem2', 'etc.'],
+\         'excludedMagicComments': ['compiled:true']
+\       },
+\       'formatter': 'auto',
+\       'linters': [],
+\       'experimentalFeaturesEnabled': v:false
+\     }
+\   }
+\ }

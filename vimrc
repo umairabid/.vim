@@ -43,6 +43,8 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 function! s:on_lsp_buffer_enabled() abort
@@ -115,3 +117,7 @@ let g:lsp_settings = {
 \     }
 \   }
 \ }
+
+ autocmd BufWritePost *.rb :RuboCop -a
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline_theme='simple'

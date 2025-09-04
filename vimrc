@@ -18,6 +18,8 @@ function! s:on_lsp_buffer_enabled() abort
     " refer to doc to add more commands
 endfunction
 
+nnoremap <leader>ndf :NERDTreeFind<CR>
+
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -57,14 +59,17 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby compiler ruby
 autocmd FileType javascript setlocal foldmethod=marker
-autocmd VimEnter * NERDTree
+autocmd VimEnter * NERDTree | wincmd p
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
 augroup lsp_install
     au!
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+let mapleader = '\'
 let g:NERDTreeFileLines = 1
+let g:NERDTreeWinPos = 'left'
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
 let g:airline#extensions#tabline#enabled = 1

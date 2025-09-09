@@ -19,6 +19,9 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 nnoremap <leader>ndf :NERDTreeFind<CR>
+nnoremap <leader>lspec :execute '!rspec ' . expand('%') . ':' . line('.')<CR>
+nnoremap <leader>fspec :!rspec %<CR>
+nnoremap <leader>rubocop :!rubocop % -A<CR>
 
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

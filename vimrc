@@ -23,6 +23,8 @@ nnoremap <leader>lspec :execute '!rspec ' . expand('%') . ':' . line('.')<CR>
 nnoremap <leader>fspec :!rspec %<CR>
 nnoremap <leader>rubocop :!rubocop % -A<CR>
 
+inoremap <C-L> <Plug>(copilot-accept-line)
+
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -36,9 +38,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'preservim/nerdtree'
-Plug 'Exafunction/windsurf.vim'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'github/copilot.vim'
 call plug#end()
 
 syntax on
@@ -77,12 +79,17 @@ augroup lsp_install
 augroup END
 
 let mapleader = '\'
+
 let g:NERDTreeFileLines = 1
 let g:NERDTreeWinPos = 'left'
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='simple'
+
+let g:copilot_workspace_folders = ["~/Worspace"]
+
 let g:lsp_settings = {
 \   'ruby-lsp': {
 \     'initializationOptions': {

@@ -41,6 +41,9 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'github/copilot.vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 syntax on
@@ -59,6 +62,8 @@ set splitright
 set splitbelow
 set foldmethod=indent
 
+colorscheme gruvbox
+set background=dark
 filetype plugin indent on
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1

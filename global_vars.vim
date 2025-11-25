@@ -8,8 +8,8 @@ let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:fern#renderer = 'nerdfont'
 let g:fern#default_hidden = 1
-let g:copilot_workspace_folders = ['~/Workspace']
-let g:workspace = readfile('.workspace')
+
+let g:workspace = readfile($HOME . '/.vim/.workspace')
 if empty(g:workspace)
   let g:workspace = 'personal'
 else
@@ -17,7 +17,7 @@ else
 endif
 
 if g:workspace == 'work'
-  let g:copilot_workspace_folders = ['~/dev']
+  let g:copilot_workspace_folders = [$HOME . '/.vim/dev']
 else
-  let g:copilot_workspace_folders = ['~/Workspace']
+  let g:copilot_workspace_folders = [$HOME . '/.vim/Workspace']
 endif

@@ -4,6 +4,10 @@ nmap <silent><nowait> gi <Plug>(coc-implementation)
 nmap <silent><nowait> gr <Plug>(coc-references)
 
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap wl <C-w>l<CR>
+nnoremap wh <C-w>h<CR>
+nnoremap wj <C-w>j<CR>
+nnoremap wk <C-w>k<CR>
 nnoremap <leader>e :Fern . -drawer -toggle -reveal=% -width=45<CR>
 nnoremap <leader>ss :SaveSession<CR>
 nnoremap <leader>s :w<CR>

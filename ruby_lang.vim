@@ -12,30 +12,56 @@ augroup END
 
 augroup ruby-mappings
   autocmd!
-  autocmd FileType ruby nnoremap <leader>rubocop :!bundle exec rubocop -A %<CR>
+  autocmd FileType ruby nnoremap <leader>lint :call RunRubocop()<CR>
+  autocmd FileType ruby nnoremap <leader>lspec :call RunLineSpec()<CR>
+  autocmd FileType ruby nnoremap <leader>spec :call RunFileSpec()<CR>
+  autocmd FileType ruby nnoremap <leader>fspec :call RunFullSpenc()<CR>
   if g:workspace == 'work'
-    autocmd FileType ruby nnoremap <leader>lspec :execute '!rx task rspec ' . expand('%') . ':' . line('.')<CR>
-    autocmd FileType ruby nnoremap <leader>spec :!rx task rspec %<CR>
-    autocmd FileType ruby nnoremap <leader>run :call RunFileSpec()<CR>
-    autocmd FileType ruby nnoremap <leader>srun :w <Bar> call RunFileSpec()<CR>
     autocmd FileType ruby nnoremap <leader>ospec :call OpenFileSpec()<CR>
     autocmd FileType ruby nnoremap <leader>typec :!bundle exec src typecheck -a %<CR>
-  else
-    autocmd FileType ruby nnoremap <leader>lspec :execute '!rspec ' . expand('%') . ':' . line('.')<CR>
-    autocmd FileType ruby nnoremap <leader>spec :!rspec %<CR>
   endif
 augroup END
-
-function! RunFileSpec()
-  let fp = expand('%')
-  let fp = substitute(fp, '\v(apps/[^/]+/)', '\1spec/', '')
-  let fp = substitute(fp, '\v\.rb$', '_spec.rb', '')
-  execute '!rx task rspec ' . fp
-endfunction
 
 function! OpenFileSpec()
   let fp = expand('%')
   let fp = substitute(fp, '\v(apps/[^/]+/)', '\1spec/', '')
   let fp = substitute(fp, '\v\.rb$', '_spec.rb', '')
   execute 'vs ' . fp
+endfunction
+
+function! RunRubocop()
+  let l:cmd = ['bundle', 'exec', 'rubocop', '-A', expand('%')]
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunFullSpenc()
+  if g:workspace == 'work'
+    let l:cmd = ['rx', 'task', 'rspec']
+  else
+    let l:cmd = ['rspec']
+  endif
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunLineSpec()
+  if g:workspace == 'work'
+    let l:cmd = ['rx', 'task', 'rspec', expand('%') . ':' . line('.')]
+  else
+    let l:cmd = ['rspec', expand('%') . ':' . line('.')]
+  endif
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunFileSpec()
+  if g:workspace == 'work'
+    let fp = expand('%')
+    let fp = substitute(fp, '\v(apps/[^/]+/)', '\1spec/', '')
+    let fp = substitute(fp, '\v\.rb$', '_spec.rb', '')
+    let l:cmd = ['rx', 'task', 'rspec', fp]
+  else
+    let fp = expand('%')
+    let fp = substitute(fp, '\v\.rb$', '_spec.rb', '')
+    let l:cmd = ['rspec', fp]
+  endif
+  call StreamToOutput(l:cmd)
 endfunction

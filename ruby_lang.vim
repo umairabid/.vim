@@ -13,9 +13,10 @@ augroup END
 augroup ruby-mappings
   autocmd!
   autocmd FileType ruby nnoremap <leader>lint :call RunRubocop()<CR>
-  autocmd FileType ruby nnoremap <leader>lspec :call RunLineSpec()<CR>
-  autocmd FileType ruby nnoremap <leader>spec :call RunFileSpec()<CR>
-  autocmd FileType ruby nnoremap <leader>fspec :call RunFullSpenc()<CR>
+  autocmd FileType ruby nnoremap <leader>lrun :call RunLineSpec()<CR>
+  autocmd FileType ruby nnoremap <leader>run :call RunFileSpec()<CR>
+  autocmd FileType ruby nnoremap <leader>rspec :call RunFullSpec()<CR>
+  autocmd FileType ruby nnoremap <leader>frun :call RunSpec()<CR>
   if g:workspace == 'work'
     autocmd FileType ruby nnoremap <leader>ospec :call OpenFileSpec()<CR>
     autocmd FileType ruby nnoremap <leader>typec :!bundle exec src typecheck -a %<CR>
@@ -48,6 +49,15 @@ function! RunLineSpec()
     let l:cmd = ['rx', 'task', 'rspec', expand('%') . ':' . line('.')]
   else
     let l:cmd = ['rspec', expand('%') . ':' . line('.')]
+  endif
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunSpec()
+  if g:workspace == 'work'
+    let l:cmd = ['rx', 'task', 'rspec', expand('%')]
+  else
+    let l:cmd = ['rspec', expand('%')]
   endif
   call StreamToOutput(l:cmd)
 endfunction

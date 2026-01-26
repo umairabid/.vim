@@ -14,6 +14,7 @@ set splitright
 set splitbelow
 set foldmethod=indent
 set autoread
+autocmd FocusGained,BufEnter,CursorHold * checktime
 set showmatch
 set matchtime=2
 set sessionoptions-=buffers

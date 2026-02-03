@@ -4,4 +4,5 @@ source $HOME/.vim/mappings.vim
 source $HOME/.vim/plugins.vim
 source $HOME/.vim/editor.vim
 source $HOME/.vim/ruby_lang.vim
+source $HOME/.vim/go_lang.vim
 source $HOME/.vim/session.vim

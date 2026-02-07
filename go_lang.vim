@@ -5,6 +5,13 @@ augroup go-mappings
   autocmd FileType go nnoremap <leader>build :call GoBuild()<CR>
 augroup END
 
+augroup go-init
+  autocmd!
+  autocmd FileType go setlocal tabstop=4
+  autocmd FileType go setlocal shiftwidth=4  
+  autocmd FileType go setlocal softtabstop=4
+  autocmd FileType go setlocal noexpandtab
+augroup END
 
 function! GoLint()
   let l:cmd = ['go', 'fmt', expand('%')]

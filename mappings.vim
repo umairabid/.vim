@@ -48,7 +48,7 @@ function! OpenSymbolInTabAndComeBack()
   endif
 endfunction
 
-function! OpenSymbolInTabAndComeBack()
+function! OpenSymbolInTab()
   let l:current_pos = getpos('.')
   let l:current_buf = bufnr('%')
   let l:current_file = expand('%:p')

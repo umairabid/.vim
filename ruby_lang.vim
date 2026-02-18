@@ -19,7 +19,7 @@ augroup ruby-mappings
   autocmd FileType ruby nnoremap <leader>frun :call RunSpec()<CR>
   if g:workspace == 'work'
     autocmd FileType ruby nnoremap <leader>ospec :call OpenFileSpec()<CR>
-    autocmd FileType ruby nnoremap <leader>typec :!bundle exec src typecheck -a %<CR>
+    autocmd FileType ruby nnoremap <leader>typec :call RunTypeCheck()<CR>
   endif
 augroup END
 
@@ -73,5 +73,10 @@ function! RunFileSpec()
     let fp = substitute(fp, '\v\.rb$', '_spec.rb', '')
     let l:cmd = ['rspec', fp]
   endif
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunTypeCheck()
+  let l:cmd = ['bundle', 'exec', 'srb', 'tc']
   call StreamToOutput(l:cmd)
 endfunction

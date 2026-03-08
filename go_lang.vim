@@ -6,6 +6,7 @@ augroup go-mappings
   autocmd FileType go nnoremap <leader>rp :call GoRunProject()<CR>
   autocmd FileType go nnoremap <leader>bp :call GoBuildProject()<CR>
   autocmd FileType go nnoremap <leader>tidy :call GoTidy()<CR>
+  autocmd FileType go nnoremap <leader>test :call GoTest()<CR>
 augroup END
 
 augroup go-init
@@ -84,4 +85,9 @@ function! FindMainGo()
     let l:current_dir = l:parent_dir
   endwhile
   return ''
+endfunction
+
+function! GoTest()
+  let l:cmd = ['go', 'test', expand('%:p:h')]
+  call StreamToOutput(l:cmd)
 endfunction

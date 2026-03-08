@@ -14,8 +14,7 @@ nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q!<CR>
 nnoremap <leader>to :tabo<CR>
 nnoremap <leader>r :!e %<CR>
-nnoremap <leader>ostc :call OpenSymbolInTabAndComeBack()<CR>
-nnoremap <leader>ost :call OpenSymbolInTab()<CR>
+nnoremap <leader>ost :call OpenSymbolInTabAndComeBack()<CR>
 nnoremap <leader>tn gt
 nnoremap <leader>tp gT
 nnoremap <leader>tf :tabfirst<CR>
@@ -45,24 +44,5 @@ function! OpenSymbolInTabAndComeBack()
     call setpos('.', l:new_pos)
     execute "tabprev"
     execute "normal! \<C-o>"
-  endif
-endfunction
-
-function! OpenSymbolInTab()
-  let l:current_pos = getpos('.')
-  let l:current_buf = bufnr('%')
-  let l:current_file = expand('%:p')
-  
-  execute "normal! m'"
-  call CocAction('jumpDefinition')
-  sleep 100m
-  
-  let l:new_pos = getpos('.')
-  let l:new_buf = bufnr('%')
-  let l:new_file = expand('%:p')
-  
-  if l:new_pos != l:current_pos || l:new_buf != l:current_buf
-    execute "tabnew " . fnameescape(l:new_file)
-    call setpos('.', l:new_pos)
   endif
 endfunction

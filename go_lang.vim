@@ -7,6 +7,8 @@ augroup go-mappings
   autocmd FileType go nnoremap <leader>bp :call GoBuildProject()<CR>
   autocmd FileType go nnoremap <leader>tidy :call GoTidy()<CR>
   autocmd FileType go nnoremap <leader>test :call GoTest()<CR>
+
+  command! -nargs=1 GoRunTest call GoRunTest(<f-args>)
 augroup END
 
 augroup go-init
@@ -89,5 +91,10 @@ endfunction
 
 function! GoTest()
   let l:cmd = ['go', 'test', expand('%:p:h')]
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! GoRunTest(test_name)
+  let l:cmd = ['go', 'test', '-run', a:test_name, '-v', expand('%:p:h')]
   call StreamToOutput(l:cmd)
 endfunction

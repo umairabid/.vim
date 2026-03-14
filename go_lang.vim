@@ -7,6 +7,7 @@ augroup go-mappings
   autocmd FileType go nnoremap <leader>bp :call GoBuildProject()<CR>
   autocmd FileType go nnoremap <leader>tidy :call GoTidy()<CR>
   autocmd FileType go nnoremap <leader>test :call GoTest()<CR>
+  autocmd FileType go vnoremap <leader>run y:call GoRunTest(@")<CR>
 
   command! -nargs=1 GoRunTest call GoRunTest(<f-args>)
 augroup END

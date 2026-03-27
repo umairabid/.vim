@@ -9,6 +9,8 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:fern#renderer = 'nerdfont'
 let g:fern#default_hidden = 1
 
+let l:root_dir = getcwd()
+let g:rx_project = isdirectory(l:root_dir . '/.rx')
 let g:workspace = readfile($HOME . '/.vim/.workspace')
 if empty(g:workspace)
   let g:workspace = 'personal'

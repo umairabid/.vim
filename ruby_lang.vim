@@ -35,8 +35,8 @@ function! RunRubocop()
   call StreamToOutput(l:cmd)
 endfunction
 
-function! RunFullSpenc()
-  if g:workspace == 'work'
+function! RunFullSpec()
+  if g:rx_project
     let l:cmd = ['rx', 'task', 'rspec']
   else
     let l:cmd = ['rspec']
@@ -45,7 +45,7 @@ function! RunFullSpenc()
 endfunction
 
 function! RunLineSpec()
-  if g:workspace == 'work'
+  if g:rx_project
     let l:cmd = ['rx', 'task', 'rspec', expand('%') . ':' . line('.')]
   else
     let l:cmd = ['rspec', expand('%') . ':' . line('.')]
@@ -54,7 +54,7 @@ function! RunLineSpec()
 endfunction
 
 function! RunSpec()
-  if g:workspace == 'work'
+  if g:rx_project
     let l:cmd = ['rx', 'task', 'rspec', expand('%')]
   else
     let l:cmd = ['rspec', expand('%')]

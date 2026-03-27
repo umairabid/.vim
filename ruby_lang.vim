@@ -20,6 +20,7 @@ augroup ruby-mappings
   if g:workspace == 'work'
     autocmd FileType ruby nnoremap <leader>ospec :call OpenFileSpec()<CR>
     autocmd FileType ruby nnoremap <leader>typec :call RunTypeCheck()<CR>
+    autocmd FileType ruby nnoremap <leader>typeca :call RunTypeCheckAndCorrect()<CR>
   endif
 augroup END
 
@@ -78,5 +79,10 @@ endfunction
 
 function! RunTypeCheck()
   let l:cmd = ['bundle', 'exec', 'srb', 'tc']
+  call StreamToOutput(l:cmd)
+endfunction
+
+function! RunTypeCheckAndCorrect()
+  let l:cmd = ['bundle', 'exec', 'srb', 'tc', '-a']
   call StreamToOutput(l:cmd)
 endfunction

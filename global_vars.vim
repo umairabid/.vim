@@ -8,17 +8,4 @@ let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:fern#renderer = 'nerdfont'
 let g:fern#default_hidden = 1
-
-let g:rx_project = isdirectory(getcwd() . '/.rx')
-let g:workspace = readfile($HOME . '/.vim/.workspace')
-if empty(g:workspace)
-  let g:workspace = 'personal'
-else
-  let g:workspace = g:workspace[0]
-endif
-
-if g:workspace == 'work'
-  let g:copilot_workspace_folders = [$HOME . '/.vim/dev']
-else
-  let g:copilot_workspace_folders = [$HOME . '/.vim/Workspace']
-endif
+let g:copilot_workspace_folders = [$HOME . '/.vim/dev']
